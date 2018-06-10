@@ -1,0 +1,77 @@
+.score-calc
+  font-family: 'Roboto', sans-serif
+  font-weight: 700
+  width: 220px
+  margin-top: 16px
+  margin-left: 39px
+  display: flex
+  justify-content: space-between
+  &__change-score
+    height: 64px
+    width: 28px
+    &_add
+      height: 28px
+      width: 28px
+      border-radius: 3px      
+      background-color: #171717
+      display: flex
+      justify-content: center
+      cursor: url('../img/cursor.png'), pointer
+      .arrow-img
+        height: 16px
+        width: 16px
+        margin-top: 6px
+        transform: rotate(180deg)
+        background: url('../img/arrow-white.svg') no-repeat
+      &:hover
+        background-color: #FDD504
+        .arrow-img  
+          background: url('../img/arrow-black.svg') no-repeat
+          transform: rotate(0deg)
+      &_disabled
+        @extend .score-calc__change-score_add
+        cursor: default
+        .arrow-img
+          background: url('../img/arrow-black.svg') no-repeat
+          transform: rotate(0deg)
+          opacify: 0.8  
+        &:hover
+          @extend .score-calc__change-score_add_disabled
+          background-color: #171717
+
+    &_remove
+      @extend .score-calc__change-score_add
+      margin-top: 8px
+      transform: rotate(180deg)
+      &:hover
+        @extend .score-calc__change-score_add:hover
+        transform: rotate(180deg)
+      &_disabled
+        @extend .score-calc__change-score_add_disabled
+        transform: rotate(180deg)
+        margin-top: 8px
+  &__score
+    height: 64px
+    display: flex
+    &_num
+      width: 56px
+      height: 64px
+      border-radius: 3px
+      background-color: #171717
+      color: white
+      font-size: 65px
+      line-height: 64px
+      text-align: center
+      p
+        padding: 0
+        margin: 0
+    &_seporate
+      font-family: 'Times New Roman', Times
+      font-size: 37px
+      color: #FDD504
+      width: 22px
+      text-align: center
+.dot
+  line-height: 5px
+  &:first-child
+    line-height: 28px
