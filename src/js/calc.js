@@ -4,16 +4,17 @@ export default class Calculator {
   constructor() {
     this.json = require('../2a08e5726e3b4391be96afcdfab42.json');
     this.default = {} // Object with default values for all variables
-    this.num1 = +document.getElementsByClassName("score-calc__score_num")[0].innerHTML
-    this.num2 = +document.getElementsByClassName("score-calc__score_num")[1].innerHTML 
+    this.num = document.getElementsByClassName("score-calc__score_num") // include 2 score sides
+    this.num1 = +this.num[0].innerHTML
+    this.num2 = +this.num[1].innerHTML 
     this.arrayOfArrows = document.querySelectorAll("[class^=score-calc__change-score_]") // include all 4 arrows
   }
   setDefault() {
     // bind navigation buttons
-    document.getElementsByClassName("score-calc__change-score_add")[0].onclick = () => this.onChange(1, "left")
-    document.getElementsByClassName("score-calc__change-score_add")[1].onclick = () => this.onChange(1, "right")
-    document.getElementsByClassName("score-calc__change-score_remove")[0].onclick = () => this.onChange(-1, "left")
-    document.getElementsByClassName("score-calc__change-score_remove")[1].onclick = () => this.onChange(-1, "right")
+    this.arrayOfArrows[0].onclick = () => this.onChange(1, "left")
+    this.arrayOfArrows[2].onclick = () => this.onChange(1, "right")
+    this.arrayOfArrows[1].onclick = () => this.onChange(-1, "left")
+    this.arrayOfArrows[3].onclick = () => this.onChange(-1, "right")
     // form default object
     this.default.num1 = 0
     this.default.num2 = 0
@@ -36,18 +37,18 @@ export default class Calculator {
     // change score depends on actual value and side 
       if (side == "left") {
         
-        this.num1 = +document.getElementsByClassName("score-calc__score_num")[0].innerHTML + type 
+        this.num1 = +this.num[0].innerHTML + type 
         
         if ((this.num1 < 0) || (this.num1 > 8)) {
-          this.num1 = +document.getElementsByClassName("score-calc__score_num")[0].innerHTML
+          this.num1 = +this.num[0].innerHTML
         }
       
       } else {
         
-        this.num2 = +document.getElementsByClassName("score-calc__score_num")[1].innerHTML + type
+        this.num2 = +this.num[1].innerHTML + type
         
         if ((this.num2 < 0) || (this.num2 > 8)) {
-          this.num2 = +document.getElementsByClassName("score-calc__score_num")[1].innerHTML
+          this.num2 = +this.num[1].innerHTML
         }
       }
     // form changing http request
@@ -61,9 +62,9 @@ export default class Calculator {
   }  
   // formatig date fron json
   calculateDateDiff (gameTime) {
-    var time = new Date(gameTime*1000)
-    var months = ["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"]
-    var minutes = "";
+    let time = new Date(gameTime*1000)
+    const months = ["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"]
+    let minutes = "";
     
     if (time.getMinutes() < 10) {
       minutes = "0" + time.getMinutes()
