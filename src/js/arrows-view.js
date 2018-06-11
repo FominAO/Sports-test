@@ -1,41 +1,34 @@
 export default class ArrowsView {
   constructor() {
-    this.firstNum = +document.getElementsByClassName("score-calc__score_num")[0].innerHTML
-    this.secondNum = +document.getElementsByClassName("score-calc__score_num")[1].innerHTML
-    this.arrayOfArrows = [
-      document.getElementsByClassName("score-calc__change-score_add")[0],
-      document.getElementsByClassName("score-calc__change-score_add")[1],
-      document.getElementsByClassName("score-calc__change-score_remove")[0],
-      document.getElementsByClassName("score-calc__change-score_remove")[1]
-    ]
+    this.arrayOfArrows = document.querySelectorAll("[class^=score-calc__change-score_]")
   }
-  disable() {
-    if ((this.firstNum == 8) || (this.secondNum == 8)) {
-      if (this.firstNum == 8) {
+  disable(num1, num2) {
+    if ((num1 == 8) || (num2 == 8)) {
+      if ((num1 == 8) && (this.arrayOfArrows[0].className.slice(-8) != "disabled")) {
         this.arrayOfArrows[0].className += "_disabled"
       } 
-      if (this.secondNum == 8) {   
-        this.arrayOfArrows[1].className += "_disabled"
+      if ((num2 == 8) && (this.arrayOfArrows[2].className.slice(-8) != "disabled")) {   
+        this.arrayOfArrows[2].className += "_disabled"
       }
     }
-    if ((this.firstNum == 0) || (this.secondNum == 0)) {
-      if (this.firstNum == 0) {
-        this.arrayOfArrows[2].className += "_disabled"
+    if ((num1 == 0) || (num2 == 0)) {
+      if ((num1 == 0) && (this.arrayOfArrows[1].className.slice(-8) != "disabled")) {
+        this.arrayOfArrows[1].className += "_disabled"
       } 
-      if (this.secondNum == 0) {
+      if ((num2 == 0) && (this.arrayOfArrows[3].className.slice(-8) != "disabled")) {
         this.arrayOfArrows[3].className += "_disabled" 
       }
     }
-    this.enable()
+    this.enable(num1, num2)
   }
-  enable() {
+  enable(num1, num2) {
       console.log("enable") 
-      if ((this.firstNum != 0) && (this.firstNum != 8)) {
+      if ((num1 != 0) && (num1 != 8)) {
         this.arrayOfArrows[0].className = this.arrayOfArrows[0].className.slice(0, 28)
-        this.arrayOfArrows[2].className = this.arrayOfArrows[2].className.slice(0, 28)
-      }
-      if ((this.secondNum != 0) && (this.secondNum != 8)) {
         this.arrayOfArrows[1].className = this.arrayOfArrows[1].className.slice(0, 31)
+      }
+      if ((num2 != 0) && (num2 != 8)) {
+        this.arrayOfArrows[2].className = this.arrayOfArrows[2].className.slice(0, 28)
         this.arrayOfArrows[3].className = this.arrayOfArrows[3].className.slice(0, 31)
       }
   }
