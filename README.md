@@ -13,3 +13,5 @@ Or build production version:
 ``` console
 npm run build
 ```
+## See trial on GitPages
+https://fominao.github.io/Sports-test/dist/
